@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Transcriber</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="brand">Smwaad</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <!-- <a href="/tablet">Tablet Prediction</a> -->
+        </div>
+
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Logo">
+        </div>
+    </div>
+    <div id="hero" class="hero">
+        <img src="{{ url_for('static', filename='images/welcome.png') }}" alt="Healthcare Image">
+        <!-- <p>Empowering Silent Voices, Enriching Bright Minds!</p> -->
+    </div>
+    <div class="container">
+        <h2 class="heading">Upload a Video</h2>
+        
+        <form action="/home" method="post" enctype="multipart/form-data" class="upload-form">
+            <input type="file" name="video" accept="video/*" required class="file-input" id="videoInput" onchange="previewVideo(event)">
+            <video id="videoPreview" controls style="display: none; width: 100%; max-width: 500px; margin-top: 10px;"></video>
+            <button type="submit" class="upload-btn">See Sign Language</button>
+        </form>
+        
+    
+        {% if transcript %}
+            <div class="transcription-box">
+                <h3>Transcription:</h3>
+                <p class="transcription-text">{{ transcript }}</p>
+                <a href="http://localhost:4200/?text={{ transcript }}" class="sign-language-button" target="_blank">
+                    See Sign Language
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        function previewVideo(event) {
+            const file = event.target.files[0]; // Get the selected file
+            if (file) {
+                const videoPreview = document.getElementById("videoPreview");
+                videoPreview.src = URL.createObjectURL(file); // Create a URL for the video
+                videoPreview.style.display = "block"; // Show the video element
+                videoPreview.load(); // Load the video
+            }
+        }
+        </script>
+</body>
+</html>

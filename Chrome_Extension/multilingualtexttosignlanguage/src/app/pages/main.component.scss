@@ -1,0 +1,24 @@
+/* tabs.component.scss */
+
+ion-tabs {
+  // Style for the entire tabs component
+  background-color: #f0f0f0; // Example: set background color
+
+  ion-tab-bar {
+    // Style for the tab bar
+    background-color: #007bff; // Example: change tab bar background color
+    color: white; // Set the text color for the tab bar items
+
+    ion-tab-button {
+      // Style for individual tab buttons
+      &:hover {
+        background-color: #0056b3; // Change background on hover
+      }
+
+      &.tab-selected {
+        // Style for the selected tab
+        background-color: #0056b3; // Example: different color for selected tab
+      }
+    }
+  }
+}
